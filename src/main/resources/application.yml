@@ -1,0 +1,51 @@
+###监控 start
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8082
+###通过下面的配置启用所有的监控端点，默认情况下，这些端点是禁用的；
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+### 监控 end
+server:
+  port: 8081
+spring:
+  application:
+    name: houses-service
+  # 整合freemarker start
+  freemarker:
+    tempalte-loader-path: classpath:/templates
+    # 设置模板后缀名
+    suffix: .ftl
+    # 设置文档类型
+    content-type: text/html
+    # 设置页面编码格式
+    charset: UTF-8
+    # 设置页面缓存
+    cache: false
+  # freemarker end
+  # 设置静态文件路径，js,css等
+  mvc:
+    static-path-pattern: /static/**
+  #spring boot 整合jdbc
+  primary:
+      datasource:
+          url: jdbc:mysql://localhost:3306/fan?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+  secondary:
+      datasource:
+          url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+  # 整合redis start
+  # redis end
+
+jpa.hibernate.ddl-auto: update
+spring.jpa.show-sql: true
